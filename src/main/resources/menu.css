@@ -1,0 +1,35 @@
+.root {
+    -fx-background-color: linear-gradient(to bottom right, #1a1a2e, #16213e);
+}
+
+.side-panel {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 0 0 1;
+    -fx-backdrop-filter: blur(10px);
+}
+
+.menu-button {
+    -fx-background-color: #e94560;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-transition: 0.3s;
+}
+
+.menu-button:hover {
+    -fx-background-color: #ff2e63;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.welcome-label {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 32px;
+    -fx-text-fill: linear-gradient(to bottom, #ffffff, #888888);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}

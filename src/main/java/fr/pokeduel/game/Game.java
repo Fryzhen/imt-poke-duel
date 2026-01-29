@@ -5,8 +5,8 @@ public class Game {
     public Player player2;
     public Player curentPlayer;
 
-    public Game(String username) {
-        player1 = new Player(username, true);
+    public Game() {
+        player1 = new Player("You", true);
         player2 = new Player("Bot", false);
         curentPlayer = player1;
     }
