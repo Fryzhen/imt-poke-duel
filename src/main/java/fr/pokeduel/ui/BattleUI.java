@@ -27,17 +27,69 @@ public class BattleUI {
         stage.show();
     }
 
-    public static void menuScene(Game game) {
+    public static void menuScene( Game game) {
         Stage stage = new Stage();
+        BorderPane root = new BorderPane();
+
+        // --- PANNEAU DE DROITE (Menu) ---
+        VBox menuSidePanel = new VBox(15); // Espacement de 15px entre les boutons
+        menuSidePanel.setPadding(new Insets(20));
+        menuSidePanel.setAlignment(Pos.CENTER);
+        menuSidePanel.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-width: 0 0 0 2;");
+        menuSidePanel.setPrefWidth(250); // Largeur fixe pour le menu
+
+        // --- BOUTONS ---
+        Button btnBattle = new Button("Lancer un combat");
+        Button btnTeam = new Button("Changer mon équipe");
+        Button btnName = new Button("Changer mon nom");
+        Button btnQuit = new Button("Quitter");
+
+        // Style commun pour les boutons (largeur uniforme)
+        String btnStyle = "-fx-font-size: 14px; -fx-cursor: hand;";
+        for (Button b : new Button[]{btnBattle, btnTeam, btnName, btnQuit}) {
+            b.setMaxWidth(Double.MAX_VALUE); // Les boutons prendront toute la largeur du VBox
+            b.setStyle(btnStyle);
+        }
+
+        // --- ACTIONS DES BOUTONS ---
+
+        btnBattle.setOnAction(e -> {
+//            stage.setScene(getBattleScene()); // On lance le combat
+//            stage.centerOnScreen();
+        });
+
+        btnName.setOnAction(e -> {
+//            stage.setScene(getPlayerInitScene(stage)); // On retourne à l'écran de saisie
+        });
+
+        btnQuit.setOnAction(e -> stage.close()); // Ferme l'application
+
+        // On peut imaginer que btnTeam ouvrira une autre scène plus tard
+
+        // Ajout des boutons au panneau
+        menuSidePanel.getChildren().addAll(btnBattle, btnTeam, btnName, btnQuit);
+
+        // Placement dans le layout principal
+        root.setRight(menuSidePanel);
+
+        // --- ESPACE CENTRAL (Placeholder) ---
+        // Ici on pourra mettre plus tard un logo ou les stats du joueur
+        Label placeholder = new Label("Bienvenue dans PokeDuel !");
+        placeholder.setStyle("-fx-font-size: 24px; -fx-text-fill: #888888;");
+        root.setCenter(placeholder);
+
+        stage.setScene(new Scene(root, 1280, 720));
+        stage.show();
+
     }
 
-    public static void playerInitScene() {
+    public static void playerNammingScene() {
         Stage stage = new Stage();
         VBox root = new VBox(15);
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(20));
 
-        Label nameLabel = new Label("Enter your name:");
+        Label nameLabel = new Label("Entrez votre nom :");
         nameLabel.setStyle("-fx-font-weight: bold;");
 
         TextField nameInput = new TextField();
@@ -53,7 +105,7 @@ public class BattleUI {
             if (!name.isEmpty()) {
                 System.out.println("Starting game for: " + name);
                 stage.close();
-                battleScene(new Game(name));
+                menuScene(new Game(name));
             }
         });
 
