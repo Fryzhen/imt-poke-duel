@@ -23,8 +23,7 @@ javafx {
 }
 
 application {
-    // Utilise .set() pour les propriétés dans le fichier .kts
-    mainClass.set("fr.tonprojet.MainApp")
+    mainClass.set("fr.pokeduel.Main")
 }
 
 dependencies {
