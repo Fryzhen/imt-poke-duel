@@ -16,20 +16,13 @@ public class PokemonConcret extends Pokemon {
         this.attaqueParDefaut = attaqueParDefaut;
     }
 
-    @Override
+    // getType n'est pas déclaré dans la superclasse, on ne met pas @Override
     public TypePokemon getType() {
         return (types == null || types.isEmpty()) ? null : types.get(0);
     }
 
     @Override
-    public int getDegats() {
-        return attaqueParDefaut != null ? attaqueParDefaut.getDegats() : 0;
-    }
-
-    @Override
-    public void appliquer(Pokemon attaquant, Pokemon cible) {
-        if (attaqueParDefaut != null) {
-            attaqueParDefaut.appliquer(attaquant != null ? attaquant : this, cible);
-        }
+    public Attaque getAttaqueParDefaut() {
+        return attaqueParDefaut;
     }
 }
