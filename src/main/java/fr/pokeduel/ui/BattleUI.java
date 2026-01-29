@@ -27,7 +27,7 @@ public class BattleUI {
         stage.show();
     }
 
-    public static void menuScene( Game game) {
+    public static void menuScene() {
         Stage stage = new Stage();
         BorderPane root = new BorderPane();
 
@@ -105,7 +105,7 @@ public class BattleUI {
             if (!name.isEmpty()) {
                 System.out.println("Starting game for: " + name);
                 stage.close();
-                menuScene(new Game(name));
+                menuScene();
             }
         });
 
