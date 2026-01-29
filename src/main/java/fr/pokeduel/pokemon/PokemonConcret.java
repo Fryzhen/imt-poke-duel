@@ -4,6 +4,7 @@ import java.util.List;
 
 public class PokemonConcret extends Pokemon {
 
+    private static final String imagePath ="" ;
     private final Attaque attaqueParDefaut;
 
     public PokemonConcret(
@@ -12,7 +13,7 @@ public class PokemonConcret extends Pokemon {
             List<TypePokemon> types,
             Attaque attaqueParDefaut
     ) {
-        super(nom, pvMax, types);
+        super(nom, pvMax, types, imagePath);
         this.attaqueParDefaut = attaqueParDefaut;
     }
 

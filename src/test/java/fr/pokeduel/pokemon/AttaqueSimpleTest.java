@@ -11,7 +11,7 @@ class AttaqueSimpleTest {
     // Classe de test minimale pour instancier des Pokémons
     static class TestPokemon extends Pokemon {
         public TestPokemon(String nom, int pvMax, List<TypePokemon> types) {
-            super(nom, pvMax, types);
+            super(nom, pvMax, types, imagePath);
         }
 
         public TypePokemon getType() {

@@ -9,7 +9,7 @@ public abstract class Pokemon {
     protected int pvMax;
     protected List<TypePokemon> types;
 
-    public Pokemon(String nom, int pvMax, List<TypePokemon> types) {
+    public Pokemon(String nom, int pvMax, List<TypePokemon> types, String imagePath) {
         this.nom = nom;
         this.pvMax = pvMax;
         this.pv = pvMax;
