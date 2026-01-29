@@ -4,6 +4,8 @@ import java.util.List;
 
 public class PokemonConcret extends Pokemon {
 
+    private final Attaque attaqueParDefaut;
+
     public PokemonConcret(
             String nom,
             int pvMax,
@@ -11,21 +13,23 @@ public class PokemonConcret extends Pokemon {
             Attaque attaqueParDefaut
     ) {
         super(nom, pvMax, types);
+        this.attaqueParDefaut = attaqueParDefaut;
     }
 
     @Override
     public TypePokemon getType() {
-        return null;
+        return (types == null || types.isEmpty()) ? null : types.get(0);
     }
 
     @Override
     public int getDegats() {
-        return 0;
+        return attaqueParDefaut != null ? attaqueParDefaut.getDegats() : 0;
     }
 
     @Override
     public void appliquer(Pokemon attaquant, Pokemon cible) {
-
+        if (attaqueParDefaut != null) {
+            attaqueParDefaut.appliquer(attaquant != null ? attaquant : this, cible);
+        }
     }
 }
-
