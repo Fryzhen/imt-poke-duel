@@ -18,7 +18,7 @@ public class MenuUI {
         BorderPane root = new BorderPane();
 
         Scene scene = new Scene(root, 1280, 720);
-        scene.getStylesheets().add(game.getClass().getResource("/menu.css").toExternalForm());
+        scene.getStylesheets().add(game.getClass().getResource("/css/menu.css").toExternalForm());
 
         root.setRight(getPanelNode(stage, game));
 
@@ -40,7 +40,7 @@ public class MenuUI {
 
         // Application du CSS
         Scene scene = new Scene(root, 400, 250); // Un peu plus grand pour respirer
-        scene.getStylesheets().add(game.getClass().getResource("/inputName.css").toExternalForm());
+        scene.getStylesheets().add(game.getClass().getResource("/css/inputName.css").toExternalForm());
 
         Label nameLabel = new Label("ENTREZ VOTRE NOM");
         nameLabel.getStyleClass().add("label-title");

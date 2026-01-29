@@ -6,42 +6,16 @@ public abstract class Pokemon {
 
     protected String nom;
     protected int pv;
-    protected int pvMax;
+    protected Stats stats;
     protected List<TypePokemon> types;
+    protected List<TypePokemon> attaques;
+    protected String backSprite;
+    protected String frontSprite;
 
-    public Pokemon(String nom, int pvMax, List<TypePokemon> types, String imagePath) {
+    public Pokemon(String nom, Stats stats, List<TypePokemon> types,  List<Attaque> attaques) {
         this.nom = nom;
-        this.pvMax = pvMax;
-        this.pv = pvMax;
+        this.stats = stats;
+        this.pv = stats.pv;
         this.types = types;
     }
-
-    public List<TypePokemon> getTypes() {
-        return types;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public int getPv() {
-        return pv;
-    }
-
-    public int getPvMax() {
-        return pvMax;
-    }
-
-    public void subirDegats(int degats) {
-        if (degats < 0) return;
-        this.pv -= degats;
-        if (this.pv < 0) this.pv = 0;
-    }
-
-    public boolean estKO() {
-        return this.pv <= 0;
-    }
-
-    // Méthode abstraite demandée
-    public abstract Attaque getAttaqueParDefaut();
 }

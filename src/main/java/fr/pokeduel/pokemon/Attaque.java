@@ -1,15 +1,14 @@
 package fr.pokeduel.pokemon;
 
-public interface Attaque {
+import java.lang.reflect.Type;
 
-    String getNom();
-    TypePokemon getType();
-    int getDegats();
-
-    /**
-     * Applique l'attaque sur un Pokémon cible
-     * → permet le polymorphisme
-     */
-    void appliquer(Pokemon attaquant, Pokemon cible);
+public class Attaque {
+   protected int id;
+   protected String name;
+   protected Type type;
+   protected int power;
+   protected int accuracy;
+   protected int pp;
+   protected int ppRestants;
+   protected String effect;
 }
-
