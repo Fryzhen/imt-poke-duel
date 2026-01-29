@@ -2,7 +2,7 @@ package fr.pokeduel.pokemon;
 
 import java.util.List;
 
-public abstract class Pokemon implements Attaque {
+public abstract class Pokemon {
 
     protected String nom;
     protected int pv;
@@ -28,5 +28,20 @@ public abstract class Pokemon implements Attaque {
         return pv;
     }
 
-//    public abstract int attaquer();
+    public int getPvMax() {
+        return pvMax;
+    }
+
+    public void subirDegats(int degats) {
+        if (degats < 0) return;
+        this.pv -= degats;
+        if (this.pv < 0) this.pv = 0;
+    }
+
+    public boolean estKO() {
+        return this.pv <= 0;
+    }
+
+    // Méthode abstraite demandée
+    public abstract Attaque getAttaqueParDefaut();
 }

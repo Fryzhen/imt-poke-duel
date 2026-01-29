@@ -14,19 +14,13 @@ class AttaqueSimpleTest {
             super(nom, pvMax, types);
         }
 
-        @Override
         public TypePokemon getType() {
             return types.isEmpty() ? null : types.get(0);
         }
 
         @Override
-        public int getDegats() {
-            return 0;
-        }
-
-        @Override
-        public void appliquer(Pokemon attaquant, Pokemon cible) {
-            // Pas utilisé dans ce test
+        public Attaque getAttaqueParDefaut() {
+            return null; // pas utilisé dans ces tests
         }
     }
 
@@ -47,5 +41,15 @@ class AttaqueSimpleTest {
 
         atk.appliquer(null, cible);
         assertEquals(0, cible.getPv());
+    }
+
+    @Test
+    void multiplicateurTypeEstApplique() {
+        TestPokemon cible = new TestPokemon("Bulbizarre", 100, List.of(TypePokemon.PLANTE));
+        AttaqueSimple atkFeu = new AttaqueSimple("Flamme", TypePokemon.FEU, 20);
+
+        // FEU > PLANTE, multiplicateur 2.0 => 20 * 2 = 40
+        atkFeu.appliquer(null, cible);
+        assertEquals(60, cible.getPv());
     }
 }
