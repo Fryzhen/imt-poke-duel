@@ -1,4 +1,4 @@
-package fr.pokeduel.pokeApi;
+package fr.pokeduel.api;
 
 //import fr.pokeduel.combat.AttaqueSimple;
 import fr.pokeduel.pokemon.AttaqueSimple;

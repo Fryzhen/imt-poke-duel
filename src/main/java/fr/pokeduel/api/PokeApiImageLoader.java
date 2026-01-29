@@ -1,5 +1,5 @@
 // Java
-package fr.pokeduel.util;
+package fr.pokeduel.api;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
