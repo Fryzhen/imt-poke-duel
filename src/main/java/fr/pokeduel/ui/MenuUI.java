@@ -22,7 +22,7 @@ public class MenuUI {
 
         root.setRight(getPanelNode(stage, game));
 
-        Label placeholder = new Label("BIENVENUE DANS POKEDUEL");
+        Label placeholder = new Label("BIENVENUE DANS POKEDUEL " + game.player1.nom + " !");
         placeholder.getStyleClass().add("welcome-label");
         root.setCenter(placeholder);
 
@@ -58,6 +58,7 @@ public class MenuUI {
             if (!name.isEmpty()) {
                 game.player1.nom = name;
                 stage.close();
+                menuScene(game);
             } else {
                 // Petit effet visuel si vide (optionnel)
                 nameInput.setStyle("-fx-border-color: #ff7675;");
@@ -90,7 +91,10 @@ public class MenuUI {
         }
 
         btnQuit.setOnAction(e -> stage.close());
-        btnName.setOnAction(e -> playerNammingScene(game));
+        btnName.setOnAction(e -> {
+            playerNammingScene(game);
+            stage.close();
+        });
 
         menuSidePanel.getChildren().addAll(btnBattle, btnTeam, btnName, btnQuit);
         return menuSidePanel;

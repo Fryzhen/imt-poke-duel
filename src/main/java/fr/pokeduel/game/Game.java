@@ -6,7 +6,7 @@ public class Game {
     public Player curentPlayer;
 
     public Game() {
-        player1 = new Player("You", true);
+        player1 = new Player("Joueur 1", true);
         player2 = new Player("Bot", false);
         curentPlayer = player1;
     }
