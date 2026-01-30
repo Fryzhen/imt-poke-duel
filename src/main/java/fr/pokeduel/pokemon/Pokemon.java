@@ -1,19 +1,18 @@
 package fr.pokeduel.pokemon;
 
+import fr.pokeduel.data.entity.AttaqueEntity;
 import fr.pokeduel.data.entity.PokemonEntity;
 
 import java.util.List;
 
 public abstract class Pokemon extends PokemonEntity {
 
-    protected int pv;
+    protected int pvRestant;
 
 
-    public Pokemon(String nom, Stats stats, List<TypePokemon> types,  List<Attaque> attaques) {
-        this.nom = nom;
-        this.stats = stats;
-        this.pv = stats.pv;
-        this.types = types;
+    public Pokemon(String nom, Stats stats, List<TypePokemon> types, List<AttaqueEntity> attaques) {
+        super(nom, stats, types, attaques);
+        this.pvRestant = stats.pv;
     }
 
     public String getNom() {
@@ -21,7 +20,7 @@ public abstract class Pokemon extends PokemonEntity {
     }
 
     public int getPv() {
-        return pv;
+        return pvRestant;
     }
 
     public Stats getStats() {

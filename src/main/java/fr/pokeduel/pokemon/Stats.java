@@ -1,10 +1,11 @@
 package fr.pokeduel.pokemon;
 
-public class Stats {
-    public int pv;
-    public int attaque;
-    public int attaqueSpe;
-    public int defense;
-    public int defenseSpe;
-    public int vitesse;
+import fr.pokeduel.data.entity.StatsEntity;
+
+public class Stats extends StatsEntity {
+
+    public Stats(int pv, int attaque, int attaqueSpe, int defense, int defenseSpe, int vitesse) {
+        super(pv, attaque, attaqueSpe, defense, defenseSpe, vitesse);
+    }
+
 }

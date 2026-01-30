@@ -1,5 +1,6 @@
 package fr.pokeduel.data.entity;
 
+import fr.pokeduel.pokemon.Attaque;
 import fr.pokeduel.pokemon.Stats;
 import fr.pokeduel.pokemon.TypePokemon;
 
@@ -11,7 +12,14 @@ public class PokemonEntity {
     protected String nom;
     protected Stats stats;
     protected List<TypePokemon> types;
-    protected List<TypePokemon> attaques;
+    protected List<AttaqueEntity> attaques;
     protected String backSprite;
     protected String frontSprite;
+
+    public PokemonEntity(String nom, Stats stats, List<TypePokemon> types,  List<AttaqueEntity> attaques) {
+        this.nom = nom;
+        this.stats = stats;
+        this.types = types;
+    }
+
 }
