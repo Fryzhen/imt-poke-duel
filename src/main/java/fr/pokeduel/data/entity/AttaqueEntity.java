@@ -10,7 +10,6 @@ public class AttaqueEntity {
     protected int power;
     protected int accuracy;
     protected int pp;
-    protected int ppRestants;
     protected String effect;
 
     public AttaqueEntity(String name, Type type, int power, int accuracy, int pp, String effect) {
@@ -19,7 +18,6 @@ public class AttaqueEntity {
         this.power = power;
         this.accuracy = accuracy;
         this.pp = pp;
-        this.ppRestants = pp;
         this.effect = effect;
     }
 }

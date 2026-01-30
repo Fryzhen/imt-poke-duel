@@ -147,27 +147,27 @@ public class PokeDataClient {
             String nom = extraireString(data, "\"nom\"");
 
             // ----- STATS -----
-            Stats stats = new Stats();
-            stats.pv = extraireInt(data, "\"hp\"");
-            stats.attaque = extraireInt(data, "\"attack\"");
-            stats.defense = extraireInt(data, "\"defense\"");
-            stats.attaqueSpe = extraireInt(data, "\"specialAttack\"");
-            stats.defenseSpe = extraireInt(data, "\"specialDefense\"");
-            stats.vitesse = extraireInt(data, "\"speed\"");
+            int pvStat = extraireInt(data, "\"hp\"");
+            int attaqueStat = extraireInt(data, "\"attack\"");
+            int defenseStat = extraireInt(data, "\"defense\"");
+            int attaqueSpeStat = extraireInt(data, "\"specialAttack\"");
+            int defenseSpeStat = extraireInt(data, "\"specialDefense\"");
+            int vitesseStat = extraireInt(data, "\"speed\"");
+            Stats stats = new Stats(pvStat, attaqueStat, attaqueSpeStat, defenseStat, defenseSpeStat, vitesseStat);
 
             // ----- TYPES -----
-            List<TypePokemon> types = new ArrayList<>();
+            List<Integer> types = new ArrayList<>();
             List<Integer> typeIds = extraireListeInt(data, "\"typeIds\"");
-            for (int id : typeIds) {
-                types.add(TypePokemon.values()[id]);
-            }
+//            for (int id : typeIds) {
+//                types.add(TypePokemon.values()[id]);
+//            }
 
             // ----- ATTAQUES (vide pour l’instant) -----
-            List<Attaque> attaques = new ArrayList<>();
+            List<Integer> attaques = new ArrayList<>();
             List<Integer> attaqueId = extraireListeInt(data, "\"attaquesIds\"");
-            for (int id : attaqueId) {
-                attaques.add(Attaque.getAttaqueById(id));
-            }
+//            for (int id : attaqueId) {
+//                attaques.add(Attaque.getAttaqueById(id));
+//            }
 
             // ----- CRÉATION DU POKEMON -----
             Pokemon pokemon = new Pokemon(nom, stats, types, attaques) {};

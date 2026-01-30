@@ -10,7 +10,7 @@ public abstract class Pokemon extends PokemonEntity {
     protected int pvRestant;
 
 
-    public Pokemon(String nom, Stats stats, List<TypePokemon> types, List<AttaqueEntity> attaques) {
+    public Pokemon(String nom, Stats stats, List<Integer> types, List<Integer> attaques) {
         super(nom, stats, types, attaques);
         this.pvRestant = stats.pv;
     }
@@ -27,11 +27,11 @@ public abstract class Pokemon extends PokemonEntity {
         return stats;
     }
 
-    public List<TypePokemon> getTypes() {
+    public List<Integer> getTypes() {
         return types;
     }
 
-    public List<TypePokemon> getAttaques() {
+    public List<Integer> getAttaques() {
         return attaques;
     }
 
