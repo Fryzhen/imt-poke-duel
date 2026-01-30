@@ -1,16 +1,13 @@
 package fr.pokeduel.pokemon;
 
+import fr.pokeduel.data.entity.PokemonEntity;
+
 import java.util.List;
 
-public abstract class Pokemon {
+public abstract class Pokemon extends PokemonEntity {
 
-    protected String nom;
     protected int pv;
-    protected Stats stats;
-    protected List<TypePokemon> types;
-    protected List<TypePokemon> attaques;
-    protected String backSprite;
-    protected String frontSprite;
+
 
     public Pokemon(String nom, Stats stats, List<TypePokemon> types,  List<Attaque> attaques) {
         this.nom = nom;
@@ -18,4 +15,25 @@ public abstract class Pokemon {
         this.pv = stats.pv;
         this.types = types;
     }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public int getPv() {
+        return pv;
+    }
+
+    public Stats getStats() {
+        return stats;
+    }
+
+    public List<TypePokemon> getTypes() {
+        return types;
+    }
+
+    public List<TypePokemon> getAttaques() {
+        return attaques;
+    }
+
 }

@@ -1,10 +1,10 @@
 package fr.pokeduel.pokemon;
 
 public class Stats {
-    protected int pv;
-    protected int attaque;
-    protected int attaqueSpe;
-    protected int defense;
-    protected int defenseSpe;
-    protected int vitesse;
+    public int pv;
+    public int attaque;
+    public int attaqueSpe;
+    public int defense;
+    public int defenseSpe;
+    public int vitesse;
 }

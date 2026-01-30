@@ -11,4 +11,8 @@ public class Attaque {
    protected int pp;
    protected int ppRestants;
    protected String effect;
+
+   public static Attaque getAttaqueById(int id) {
+      return null;
+   }
 }
