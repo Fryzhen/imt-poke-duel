@@ -11,5 +11,4 @@ public class DataRecever<T> {
         return data;
     }
 
-
 }
