@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Pokemon {
 
-    protected int id;
-    protected String nom;
-    protected Stats stats;
-    protected List<Integer> types;
-    protected List<Integer> attaques;
-    protected String backSprite;
-    protected String frontSprite;
+    public int id;
+    public String nom;
+    public Stats stats;
+    public List<Integer> types;
+    public List<Integer> attaques;
+    public String backSprite;
+    public String frontSprite;
 
     public Pokemon(String nom, Stats stats, List<Integer> types, List<Integer> attaques) {
         this.nom = nom;

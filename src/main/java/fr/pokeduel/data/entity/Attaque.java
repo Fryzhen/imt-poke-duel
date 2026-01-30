@@ -4,13 +4,13 @@ import java.lang.reflect.Type;
 
 public class Attaque {
 
-    protected int id;
-    protected String name;
-    protected Type type;
-    protected int power;
-    protected int accuracy;
-    protected int pp;
-    protected String effect;
+    public int id;
+    public String name;
+    public Type type;
+    public int power;
+    public int accuracy;
+    public int pp;
+    public String effect;
 
     public Attaque(String name, Type type, int power, int accuracy, int pp, String effect) {
         this.name = name;
