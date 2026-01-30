@@ -2,7 +2,7 @@ package fr.pokeduel.data.entity;
 
 import java.lang.reflect.Type;
 
-public class AttaqueEntity {
+public class Attaque {
 
     protected int id;
     protected String name;
@@ -12,7 +12,7 @@ public class AttaqueEntity {
     protected int pp;
     protected String effect;
 
-    public AttaqueEntity(String name, Type type, int power, int accuracy, int pp, String effect) {
+    public Attaque(String name, Type type, int power, int accuracy, int pp, String effect) {
         this.name = name;
         this.type = type;
         this.power = power;

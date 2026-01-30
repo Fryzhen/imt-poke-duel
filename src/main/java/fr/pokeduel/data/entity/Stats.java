@@ -1,6 +1,6 @@
 package fr.pokeduel.data.entity;
 
-public class StatsEntity {
+public class Stats {
 
     public int pv;
     public int attaque;
@@ -9,7 +9,7 @@ public class StatsEntity {
     public int defenseSpe;
     public int vitesse;
 
-    public StatsEntity(int pv, int attaque, int attaqueSpe, int defense, int defenseSpe, int vitesse) {
+    public Stats(int pv, int attaque, int attaqueSpe, int defense, int defenseSpe, int vitesse) {
         this.pv = pv;
         this.attaque = attaque;
         this.attaqueSpe = attaqueSpe;

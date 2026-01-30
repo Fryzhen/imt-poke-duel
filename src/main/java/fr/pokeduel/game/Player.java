@@ -1,8 +1,8 @@
 package fr.pokeduel.game;
 
-import fr.pokeduel.pokemon.Pokemon;
 
-import java.util.ArrayList;
+import fr.pokeduel.data.entity.Pokemon;
+
 import java.util.List;
 
 public class Player {
