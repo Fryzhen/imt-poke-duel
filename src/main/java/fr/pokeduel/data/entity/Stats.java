@@ -9,13 +9,5 @@ public class Stats {
     public int defenseSpe;
     public int vitesse;
 
-    public Stats(int pv, int attaque, int attaqueSpe, int defense, int defenseSpe, int vitesse) {
-        this.pv = pv;
-        this.attaque = attaque;
-        this.attaqueSpe = attaqueSpe;
-        this.defense = defense;
-        this.defenseSpe = defenseSpe;
-        this.vitesse = vitesse;
-    }
-
+    public Stats() {}
 }

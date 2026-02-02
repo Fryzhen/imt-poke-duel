@@ -1,5 +1,6 @@
 package fr.pokeduel.ui;
 
+import fr.pokeduel.data.entity.Pokemon;
 import fr.pokeduel.game.Game;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,7 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -20,11 +24,12 @@ public class MenuUI {
         Scene scene = new Scene(root, 1280, 720);
         scene.getStylesheets().add(game.getClass().getResource("/css/menu.css").toExternalForm());
 
+        root.setCenter(getTeamPanelNode(stage, game));
         root.setRight(getPanelNode(stage, game));
 
         Label placeholder = new Label("BIENVENUE DANS POKEDUEL " + game.player1.nom + " !");
         placeholder.getStyleClass().add("welcome-label");
-        root.setCenter(placeholder);
+//        root.setCenter(placeholder);
 
         stage.setScene(scene);
         stage.setTitle("PokeDuel - Menu Principal");
@@ -34,11 +39,10 @@ public class MenuUI {
 
     public static void playerNammingScene(Game game) {
         Stage stage = new Stage();
-        VBox root = new VBox(20); // Augmenté un peu l'espacement
+        VBox root = new VBox(20);
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(30));
 
-        // Application du CSS
         Scene scene = new Scene(root, 400, 250); // Un peu plus grand pour respirer
         scene.getStylesheets().add(game.getClass().getResource("/css/inputName.css").toExternalForm());
 
@@ -90,6 +94,7 @@ public class MenuUI {
             b.getStyleClass().add("menu-button");
         }
 
+        btnBattle.setDisable(game.player1.pokemons.isEmpty());
         btnQuit.setOnAction(e -> stage.close());
         btnName.setOnAction(e -> {
             playerNammingScene(game);
@@ -98,5 +103,25 @@ public class MenuUI {
 
         menuSidePanel.getChildren().addAll(btnBattle, btnTeam, btnName, btnQuit);
         return menuSidePanel;
+    }
+
+    private static Node getTeamPanelNode(Stage stage, Game game) {
+        GridPane teamPanel = new GridPane();
+        teamPanel.getStyleClass().add("team-panel");
+        teamPanel.setPadding(new Insets(20));
+        teamPanel.setHgap(30);
+        teamPanel.setVgap(30);
+        teamPanel.setAlignment(Pos.CENTER);
+
+        int i = 0;
+        for (Pokemon pokemon : game.player1.pokemons) {
+            ImageView iv = new ImageView(pokemon.frontSprite);
+            iv.getStyleClass().add("team-pokemon-sprite");
+
+            iv.setPreserveRatio(true);
+            teamPanel.add(iv, i % 3, i / 3);
+            i++;
+        }
+        return teamPanel;
     }
 }

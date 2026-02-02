@@ -33,3 +33,11 @@
     -fx-text-fill: linear-gradient(to bottom, #ffffff, #888888);
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
+
+.team-pokemon-sprite {
+    -fx-fit-width: 200px;
+}
+
+.team-pokemon-sprite:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}

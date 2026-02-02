@@ -9,7 +9,7 @@ import java.util.List;
 public class Player {
     public String nom;
     public boolean isHuman;
-    public List<Integer> pokemons;
+    public List<Pokemon> pokemons;
 
     public Player(String nom, boolean isHuman) {
         this.nom = nom;
@@ -17,17 +17,21 @@ public class Player {
         this.pokemons = new ArrayList<>();
     }
 
-    public void addPokemon(int pokemonId) {
+    public void addPokemon(Pokemon pokemon) {
         if ( this.pokemons.size() >= 6 ) {
             throw new RuntimeException("Un joueur ne peut pas avoir plus de 6 pokémons");
         }
-        this.pokemons.add(pokemonId);
+        this.pokemons.add(pokemon);
     }
 
-    public void removePokemon(int pokemonId) {
-        if ( !this.pokemons.contains(pokemonId) ) {
-            throw new RuntimeException("Le pokémon avec l'id " + pokemonId + " n'appartient pas au joueur " + this.nom);
+    public void removePokemon(Pokemon pokemon) {
+        if ( !this.pokemons.contains(pokemon) ) {
+            throw new RuntimeException("Le pokémon avec l'id " + pokemon.id + " n'appartient pas au joueur " + this.nom);
         }
-        this.pokemons.remove(pokemonId);
+        this.pokemons.remove(pokemon);
+    }
+
+    public boolean isPokemonEmpty() {
+        return this.pokemons.isEmpty();
     }
 }
