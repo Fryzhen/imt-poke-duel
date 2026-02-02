@@ -26,10 +26,6 @@ public class MenuUI {
         root.setCenter(getTeamPanelNode(stage, game));
         root.setRight(getPanelNode(stage, game));
 
-        Label placeholder = new Label("BIENVENUE DANS POKEDUEL " + game.player1.nom + " !");
-        placeholder.getStyleClass().add("welcome-label");
-//        root.setCenter(placeholder);
-
         stage.setScene(scene);
         stage.setTitle("PokeDuel - Menu Principal");
         stage.show();
@@ -63,7 +59,6 @@ public class MenuUI {
                 stage.close();
                 menuScene(game);
             } else {
-                // Petit effet visuel si vide (optionnel)
                 nameInput.setStyle("-fx-border-color: #ff7675;");
             }
         });
@@ -72,7 +67,7 @@ public class MenuUI {
 
         stage.setTitle("PokeDuel - Inscription");
         stage.setScene(scene);
-        stage.setResizable(false); // Plus propre pour une petite fenêtre
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -94,6 +89,10 @@ public class MenuUI {
         }
 
         btnBattle.setDisable(game.player1.pokemons.isEmpty());
+        btnBattle.setOnAction(e -> {
+            BattleUI.battleScene(game);
+            stage.close();
+        });
         btnQuit.setOnAction(e -> stage.close());
         btnName.setOnAction(e -> {
             playerNammingScene(game);
