@@ -6,7 +6,7 @@
     -fx-background-color: rgba(255, 255, 255, 0.05);
     -fx-border-color: rgba(255, 255, 255, 0.1);
     -fx-border-width: 0 0 0 1;
-    -fx-backdrop-filter: blur(10px);
+    /*-fx-backdrop-filter: blur(10px);*/
 }
 
 .menu-button {
@@ -40,4 +40,44 @@
 
 .team-pokemon-sprite:hover {
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+/* Style de base pour tous les boutons du menu (héritage) */
+.team-button, .attack-button {
+    -fx-background-color: #e94560;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.team-button:hover, .attack-button:hover {
+    -fx-background-color: #ff2e63;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Taille spécifique pour les 6 Pokémons (plus petits) */
+.team-button {
+    -fx-font-size: 14px;
+    -fx-min-width: 120px;
+    -fx-min-height: 50px;
+}
+
+/* Taille spécifique pour les 4 attaques (plus larges) */
+.attack-button {
+    -fx-font-size: 18px;
+    -fx-min-width: 180px;
+    -fx-min-height: 70px;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-width: 2;
+}
+
+/* La zone de fond du menu */
+.battle-menu-area {
+    -fx-background-color: #222222;
+    -fx-border-color: #e94560; /* Changé en rouge pour coller au thème */
+    -fx-border-width: 5 0 0 0;
+    -fx-padding: 20;
 }

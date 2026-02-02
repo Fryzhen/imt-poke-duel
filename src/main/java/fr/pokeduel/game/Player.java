@@ -1,7 +1,7 @@
 package fr.pokeduel.game;
 
 
-import fr.pokeduel.data.entity.Pokemon;
+import fr.pokeduel.entity.Pokemon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.List;
 public class Player {
     public String nom;
     public boolean isHuman;
+    public int pokemonActifIndex = 0;
     public List<Pokemon> pokemons;
 
     public Player(String nom, boolean isHuman) {
@@ -29,6 +30,13 @@ public class Player {
             throw new RuntimeException("Le pokémon avec l'id " + pokemon.id + " n'appartient pas au joueur " + this.nom);
         }
         this.pokemons.remove(pokemon);
+    }
+
+    public void reset() {
+        this.pokemonActifIndex = 0;
+        for (Pokemon pokemon : pokemons) {
+            pokemon.resetPokemon();
+        }
     }
 
     public boolean isPokemonEmpty() {

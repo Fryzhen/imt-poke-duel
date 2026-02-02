@@ -1,4 +1,4 @@
-package fr.pokeduel.data.entity;
+package fr.pokeduel.entity;
 
 public class Stats {
 

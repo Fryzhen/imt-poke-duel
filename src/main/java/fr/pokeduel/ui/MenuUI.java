@@ -1,6 +1,6 @@
 package fr.pokeduel.ui;
 
-import fr.pokeduel.data.entity.Pokemon;
+import fr.pokeduel.entity.Pokemon;
 import fr.pokeduel.game.Game;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -38,7 +38,7 @@ public class MenuUI {
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(30));
 
-        Scene scene = new Scene(root, 400, 250); // Un peu plus grand pour respirer
+        Scene scene = new Scene(root, 400, 250);
         scene.getStylesheets().add(game.getClass().getResource("/css/inputName.css").toExternalForm());
 
         Label nameLabel = new Label("ENTREZ VOTRE NOM");

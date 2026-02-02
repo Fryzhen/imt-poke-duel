@@ -1,4 +1,4 @@
-package fr.pokeduel.data.entity;
+package fr.pokeduel.entity;
 
 public class Attaque {
 
@@ -9,6 +9,7 @@ public class Attaque {
     public int accuracy;
     public int damageClassId;
     public int pp;
+    public int ppRestants;
     public int priority;
 
     public Attaque() {}

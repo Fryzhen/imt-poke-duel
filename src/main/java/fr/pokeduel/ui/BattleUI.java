@@ -1,28 +1,31 @@
 package fr.pokeduel.ui;
 
 import fr.pokeduel.game.Game;
-import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class BattleUI {
 
+public class BattleUI {
     public static void battleScene(Game game) {
         Stage stage = new Stage();
-        BorderPane root = new BorderPane();
-        root.setPadding(new Insets(20));
+        game.resetGame();
 
-        Label battleLabel = new Label("Welcome to the Battle Scene " + game.curentPlayer.nom + " !");
-        battleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-        root.setCenter(battleLabel);
-
-        // get height and width of the screen of the computer
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-        Scene scene = new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+        double width = screenBounds.getWidth();
+        double height = screenBounds.getHeight();
+
+        VBox root = new VBox();
+        root.getStyleClass().add("battle-root");
+        root.getChildren().addAll(BattleScreenUI.getBattleAreaNode(game, width, height), BattleMenuUI.getMenuAreaNode(game, width, height));
+
+        Scene scene = new Scene(root, width, height);
+
+        String css = BattleMenuUI.class.getResource("/css/battleScene.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
         stage.setTitle("PokeDuel - Battle");
         stage.setScene(scene);
         stage.show();

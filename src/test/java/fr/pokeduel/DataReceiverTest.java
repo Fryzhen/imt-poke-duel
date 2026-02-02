@@ -1,9 +1,9 @@
 package fr.pokeduel;
 
 import fr.pokeduel.data.DataLoader;
-import fr.pokeduel.data.entity.Attaque;
-import fr.pokeduel.data.entity.Pokemon;
-import fr.pokeduel.data.entity.Type;
+import fr.pokeduel.entity.Attaque;
+import fr.pokeduel.entity.Pokemon;
+import fr.pokeduel.entity.Type;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
