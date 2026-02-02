@@ -12,7 +12,7 @@ public class Main extends Application {
         MenuUI.menuScene(new Game());
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         launch();
     }
 }

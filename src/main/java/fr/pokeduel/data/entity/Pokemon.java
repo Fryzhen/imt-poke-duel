@@ -22,5 +22,6 @@ public class Pokemon {
 
     public String frontSprite;
 
-    public Pokemon() {}
+    public Pokemon() {
+    }
 }
