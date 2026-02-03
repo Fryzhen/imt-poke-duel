@@ -9,5 +9,5 @@ public abstract class Bot extends Player {
         super(nom, false);
     }
 
-    abstract Action getMove(Game game);
+    public abstract Action decideAction(Game game);
 }

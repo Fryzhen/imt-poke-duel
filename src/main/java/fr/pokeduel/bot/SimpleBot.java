@@ -9,7 +9,7 @@ public class SimpleBot extends Bot {
         super(nom);
     }
 
-    Action getMove(Game game) {
-        return new Echanger(this, pokemons.get(pokemonActifIndex + 1 % pokemons.size()).id);
+    public Action decideAction(Game game) {
+        return new Echanger(this, pokemonActifIndex + 1 % pokemons.size());
     }
 }

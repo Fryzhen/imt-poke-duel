@@ -6,4 +6,8 @@ public class Echanger extends Action {
     public Echanger(Player player, int valueId) {
         super(player, valueId);
     }
+
+    public int getPriority() {
+        return 1;
+    }
 }

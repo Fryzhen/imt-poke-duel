@@ -18,7 +18,7 @@ public class BattleScreenUI {
         battleArea.setBackground(new Background(bgImage));
 
 
-        Pokemon playerPoke = game.players.get(0).pokemons.get(game.players.get(0).pokemonActifIndex);
+        Pokemon playerPoke = game.player.pokemons.get(game.player.pokemonActifIndex);
         ImageView playerSprite = new ImageView(new Image(playerPoke.backSprite != null ? playerPoke.backSprite : playerPoke.frontSprite));
         playerSprite.setFitWidth(200);
         playerSprite.setPreserveRatio(true);
@@ -27,8 +27,8 @@ public class BattleScreenUI {
         playerSprite.setX(width * 0.38);
         playerSprite.setY(height * 0.4);
 
-        Pokemon enemyPoke = game.players.get(1).pokemons.get(game.players.get(1).pokemonActifIndex);
-        ImageView enemySprite = new ImageView(new Image(game.players.get(1).pokemons.get(game.players.get(1).pokemonActifIndex).frontSprite));
+        Pokemon enemyPoke = game.bot.pokemons.get(game.bot.pokemonActifIndex);
+        ImageView enemySprite = new ImageView(new Image(game.bot.pokemons.get(game.bot.pokemonActifIndex).frontSprite));
         enemySprite.setFitWidth(180);
         enemySprite.setPreserveRatio(true);
         enemySprite.setScaleX(1.2);

@@ -28,15 +28,15 @@ public class MenuUI {
             b.getStyleClass().add("menu-button");
         }
 
-        btnBattle.setDisable(game.players.get(0).pokemons.isEmpty());
+        btnBattle.setDisable(game.player.pokemons.isEmpty());
         btnBattle.setOnAction(e -> {
-            ScreenManager.displayBattleChooseAction(game);
             game.stage.close();
+            ScreenManager.initDisplayBattle(game);
         });
         btnQuit.setOnAction(e -> game.stage.close());
         btnName.setOnAction(e -> {
-            ScreenManager.displayNameChange(game);
             game.stage.close();
+            ScreenManager.displayNameChange(game);
         });
 
         menuSidePanel.getChildren().addAll(btnBattle, btnTeam, btnName, btnQuit);
@@ -52,7 +52,7 @@ public class MenuUI {
         teamPanel.setAlignment(Pos.CENTER);
 
         int i = 0;
-        for (Pokemon pokemon : game.players.get(0).pokemons) {
+        for (Pokemon pokemon : game.player.pokemons) {
             ImageView iv = new ImageView(pokemon.frontSprite);
             iv.getStyleClass().add("team-pokemon-sprite");
 

@@ -6,6 +6,8 @@ import fr.pokeduel.exceptions.MaximumAttaqueAppriseException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 public class Pokemon {
     public int id;
@@ -53,5 +55,43 @@ public class Pokemon {
                 attaque.ppRestants = attaque.pp;
             }
         }
+    }
+
+    public int calculateDamage(Pokemon defender, int attaqueId) {
+        Attaque attaque = attaques.stream().filter(a -> a.id == attaqueId).findFirst().orElse(null);
+
+        if (attaque == null) {
+            throw new RuntimeException("Le pokémon " + this.nom + " n'a pas l'attaque avec l'id " + attaqueId);
+        }
+
+        int statAttaque = attaque.damageClassId == 2 ? this.stats.attaque : this.stats.attaqueSpe;
+        int statDefense = attaque.damageClassId == 2 ? defender.stats.defense : defender.stats.defenseSpe;
+
+        Random random = new Random();
+        if (random.nextInt(100) >= attaque.accuracy) {
+            return 0;
+        }
+
+        int damage = attaque.power * (statAttaque / statDefense) / 2;
+
+        if (types.contains(attaque.typeId)) {
+            damage = (int) (1.5 * damage);
+        }
+
+        DataLoader<Type> dlType = new DataLoader<Type>(Type.class);
+
+        Type attaqueType = dlType.loadById(attaque.typeId);
+        for (Integer defenderTypeId : defender.types) {
+            if (new ArrayList<>(IntStream.of(attaqueType.double_damage_to).boxed().toList()).contains(defenderTypeId)) {
+                damage *= 2;
+            }
+            if (new ArrayList<>(IntStream.of(attaqueType.half_damage_to).boxed().toList()).contains(defenderTypeId)) {
+                damage /= 2;
+            }
+            if (new ArrayList<>(IntStream.of(attaqueType.no_damage_to).boxed().toList()).contains(defenderTypeId)) {
+                damage = 0;
+            }
+        }
+        return damage;
     }
 }

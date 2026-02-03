@@ -6,4 +6,8 @@ public class Attaquer extends Action {
     public Attaquer(Player player, int valueId) {
         super(player, valueId);
     }
+
+    public int getPriority() {
+        return 0;
+    }
 }

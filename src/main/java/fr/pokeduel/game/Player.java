@@ -42,4 +42,18 @@ public class Player {
     public boolean isPokemonEmpty() {
         return this.pokemons.isEmpty();
     }
+
+    public void setActivePokemon(int id) {
+        for (int i = 0; i < this.pokemons.size(); i++) {
+            if (this.pokemons.get(i).id == id) {
+                this.pokemonActifIndex = i;
+                return;
+            }
+        }
+        throw new RuntimeException("Le pokémon avec l'id " + id + " n'appartient pas au joueur " + this.nom);
+    }
+
+    public Pokemon getActivePokemon() {
+        return this.pokemons.get(this.pokemonActifIndex);
+    }
 }
