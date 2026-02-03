@@ -18,7 +18,7 @@ public class Game {
         this.player = new Player("Joueur 1", true);
         this.bot = new SimpleBot("Bot");
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 1; i++) {
             this.player.addPokemon(getRandomPokemon());
             this.bot.addPokemon(getRandomPokemon());
         }
@@ -35,7 +35,7 @@ public class Game {
         Random rand = new Random();
         int randomId = rand.nextInt(1024) + 1; // IDs from 1 to 151
         Pokemon pokemon = dl.loadById(randomId);
-        for (int i = 0; i < rand.nextInt(4) + 1; i++) {
+        for (int i = 0; i < 4; i++) {
             pokemon.attaques.add(getRandomAttaque(pokemon));
         }
         return pokemon;

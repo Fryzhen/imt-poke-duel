@@ -10,6 +10,15 @@ public class SimpleBot extends Bot {
     }
 
     public Action decideAction(Game game) {
-        return new Echanger(this, pokemonActifIndex + 1 % pokemons.size());
+        return new Echanger(this, getSwitchInPokemonIndex(game));
+    }
+
+    public int getSwitchInPokemonIndex(Game game) {
+        for (int i = 0; i < game.bot.pokemons.size(); i++) {
+            if (!game.bot.pokemons.get(i).isKO() && i != game.bot.pokemonActifIndex) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

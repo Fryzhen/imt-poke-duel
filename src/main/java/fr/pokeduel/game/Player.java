@@ -56,4 +56,13 @@ public class Player {
     public Pokemon getActivePokemon() {
         return this.pokemons.get(this.pokemonActifIndex);
     }
+
+    public boolean hasAblePokemon() {
+        for (Pokemon p : this.pokemons) {
+            if (!p.isKO()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

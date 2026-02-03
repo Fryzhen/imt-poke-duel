@@ -18,4 +18,8 @@ public class BattleActionResolveUI {
 
         return menuArea;
     }
+
+    public static Node getMessageBoxNode(double width, double height, String message) {
+        return getActionResolveNode(null, 0, height, message);
+    }
 }

@@ -94,4 +94,12 @@ public class Pokemon {
         }
         return damage;
     }
+
+    public String getAttackNameById(int attaqueId) {
+        Attaque attaque = attaques.stream().filter(a -> a.id == attaqueId).findFirst().orElse(null);
+        if (attaque == null) {
+            throw new RuntimeException("Le pokémon " + this.nom + " n'a pas l'attaque avec l'id " + attaqueId);
+        }
+        return attaque.name;
+    }
 }

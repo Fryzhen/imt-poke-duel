@@ -27,8 +27,8 @@ public class BattleScreenUI {
         playerSprite.setX(width * 0.38);
         playerSprite.setY(height * 0.4);
 
-        Pokemon enemyPoke = game.bot.pokemons.get(game.bot.pokemonActifIndex);
-        ImageView enemySprite = new ImageView(new Image(game.bot.pokemons.get(game.bot.pokemonActifIndex).frontSprite));
+        Pokemon enemyPoke = game.bot.getActivePokemon();
+        ImageView enemySprite = new ImageView(new Image(game.bot.getActivePokemon().frontSprite));
         enemySprite.setFitWidth(180);
         enemySprite.setPreserveRatio(true);
         enemySprite.setScaleX(1.2);

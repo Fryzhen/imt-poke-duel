@@ -85,11 +85,13 @@ public class BattleMenuUI {
                 atkBtn.setDisable(true);
             } else {
                 Attaque attaque = pActif.attaques.get(i);
-                atkBtn = new Button(attaque.name.substring(0, 1).toUpperCase() + attaque.name.substring(1).toLowerCase());
-                atkBtn.getStyleClass().add("attack-button");
-                atkBtn.setOnAction(e -> {
-                    BattleResolver.resolveBattle(game, new Attaquer(game.player, attaque.id));
-                });
+                if (attaque != null) {
+                    atkBtn = new Button(attaque.name.substring(0, 1).toUpperCase() + attaque.name.substring(1).toLowerCase());
+                    atkBtn.getStyleClass().add("attack-button");
+                    atkBtn.setOnAction(e -> {
+                        BattleResolver.resolveBattle(game, new Attaquer(game.player, attaque.id));
+                    });
+                }
             }
             attackGrid.add(atkBtn, i % 2, i / 2);
         }
