@@ -1,4 +1,3 @@
-/* --- Styles pour les menus de combat --- */
 .root {
     -fx-background-color: #16213e
 }
@@ -11,7 +10,6 @@
     -fx-padding: 0 0 10 0;
 }
 
-/* Style de base pour les boutons d'action (Attaque et Team) */
 .attack-button, .team-button {
     -fx-background-color: linear-gradient(to bottom, #e94560, #a02a3d);
     -fx-text-fill: white;
@@ -24,21 +22,18 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
 }
 
-/* Effets au survol */
 .attack-button:hover, .team-button:hover {
     -fx-background-color: linear-gradient(to bottom, #ff4d6d, #e94560);
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }
 
-/* Effet clic (enfoncé) */
 .attack-button:pressed, .team-button:pressed {
     -fx-scale-x: 0.96;
     -fx-scale-y: 0.96;
     -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0, 0, 1);
 }
 
-/* Gestion des boutons désactivés (Pokémon actuel ou slot vide) */
 .attack-button:disabled, .team-button:disabled {
     -fx-opacity: 0.4;
     -fx-background-color: #2b2b2b;
@@ -46,14 +41,11 @@
     -fx-cursor: default;
 }
 
-/* Cas particulier : Pokémon actuellement sur le terrain */
 .active-pokemon {
-    -fx-border-color: #00ffcc; /* Une bordure turquoise pour dire "déjà là" */
+    -fx-border-color: #00ffcc;
     -fx-border-width: 2;
     -fx-border-radius: 8;
 }
-
-/* --- Tailles spécifiques --- */
 
 .attack-button {
     -fx-font-size: 16px;
@@ -65,4 +57,51 @@
     -fx-min-width: 90px;
     -fx-min-height: 90px;
     -fx-padding: 5;
+}
+
+/* Le conteneur principal */
+.health-block {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 15 0 15 0;
+    -fx-border-color: #505050;
+    -fx-border-width: 2;
+    -fx-border-radius: 15 0 15 0;
+    -fx-padding: 8;
+}
+
+/* Le nom du Pokémon */
+.pokemon-name {
+    -fx-font-family: 'Arial';
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #303030;
+}
+
+/* La barre de progression de base */
+.hp-bar {
+    -fx-control-inner-background: #e0e0e0;
+}
+
+/* Classes dynamiques pour la couleur */
+.hp-high {
+    -fx-accent: #7cfc00;
+}
+
+.hp-medium {
+    -fx-accent: #ffaa00;
+}
+
+.hp-low {
+    -fx-accent: #ff0000;
+}
+
+/* Texte des PV */
+.hp-text-container {
+    -fx-alignment: CENTER-RIGHT;
+}
+
+.hp-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #303030;
 }

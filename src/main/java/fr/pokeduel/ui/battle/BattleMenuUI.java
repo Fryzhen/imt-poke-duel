@@ -1,5 +1,8 @@
-package fr.pokeduel.ui;
+package fr.pokeduel.ui.battle;
 
+import fr.pokeduel.actions.Action;
+import fr.pokeduel.actions.Attaquer;
+import fr.pokeduel.entity.Attaque;
 import fr.pokeduel.entity.Pokemon;
 import fr.pokeduel.game.Game;
 import javafx.geometry.Pos;
@@ -12,8 +15,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class BattleMenuUI {
+    private static HBox menuArea;
+
     public static Node getMenuAreaNode(Game game, double width, double height) {
-        HBox menuArea = new HBox(100);
+        menuArea = new HBox(100);
         menuArea.setPrefHeight(height * 0.3);
         menuArea.setAlignment(Pos.CENTER);
         menuArea.getStyleClass().add("battle-menu-area");
@@ -32,7 +37,7 @@ public class BattleMenuUI {
         teamGrid.setVgap(10);
         teamGrid.setAlignment(Pos.CENTER);
 
-        var team = game.player1.pokemons;
+        var team = game.players.get(0).pokemons;
         for (int i = 0; i < team.size(); i++) {
             Button pokeBtn = new Button();
             ImageView pokeImg = new ImageView(team.get(i).frontSprite);
@@ -42,7 +47,7 @@ public class BattleMenuUI {
             pokeBtn.setGraphic(pokeImg);
             pokeBtn.getStyleClass().add("team-button");
 
-            if (i == game.player1.pokemonActifIndex) {
+            if (i == game.players.get(0).pokemonActifIndex) {
                 pokeBtn.setDisable(true);
                 pokeBtn.getStyleClass().add("active-pokemon");
             }
@@ -63,23 +68,39 @@ public class BattleMenuUI {
         attackGrid.setVgap(15);
         attackGrid.setAlignment(Pos.CENTER);
 
-        Pokemon pActif = game.player1.pokemons.get(game.player1.pokemonActifIndex);
+        Pokemon pActif = game.players.get(0).pokemons.get(game.players.get(0).pokemonActifIndex);
 
         for (int i = 0; i < 4; i++) {
             boolean hasMove = i < pActif.attaques.size();
-            String moveName = hasMove ? pActif.attaques.get(i).name : "-";
-
-            Button atkBtn = new Button(moveName.substring(0, 1).toUpperCase() + moveName.substring(1).toLowerCase());
-            atkBtn.getStyleClass().add("attack-button");
-
+            Button atkBtn = null;
             if (!hasMove) {
+                atkBtn = new Button("-");
+                atkBtn.getStyleClass().add("attack-button");
                 atkBtn.setDisable(true);
+            } else {
+                Attaque attaque = pActif.attaques.get(i);
+                atkBtn = new Button(attaque.name.substring(0, 1).toUpperCase() + attaque.name.substring(1).toLowerCase());
+                atkBtn.getStyleClass().add("attack-button");
+                atkBtn.setOnAction(e -> {
+                    switchToActionScreen(game, new Attaquer(game.players.get(0), attaque.id));
+                });
             }
-
             attackGrid.add(atkBtn, i % 2, i / 2);
         }
         VBox vbox = new VBox(15, label, attackGrid);
         vbox.setAlignment(Pos.CENTER);
         return vbox;
+    }
+
+    private static void switchToActionScreen(Game game, Action a) {
+    }
+
+    private static Node getActionScreenNode(Game game) {
+        VBox actionBox = new VBox();
+        actionBox.setAlignment(Pos.CENTER);
+        Label placeholder = new Label("Action Screen - To be implemented");
+        placeholder.getStyleClass().add("menu-title");
+        actionBox.getChildren().add(placeholder);
+        return actionBox;
     }
 }

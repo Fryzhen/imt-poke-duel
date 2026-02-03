@@ -5,73 +5,13 @@ import fr.pokeduel.game.Game;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class MenuUI {
-    public static void menuScene(Game game) {
-        Stage stage = new Stage();
-        BorderPane root = new BorderPane();
-
-        Scene scene = new Scene(root, 1280, 720);
-        scene.getStylesheets().add(game.getClass().getResource("/css/menu.css").toExternalForm());
-
-        root.setCenter(getTeamPanelNode(stage, game));
-        root.setRight(getPanelNode(stage, game));
-
-        stage.setScene(scene);
-        stage.setTitle("PokeDuel - Menu Principal");
-        stage.show();
-
-    }
-
-    public static void playerNammingScene(Game game) {
-        Stage stage = new Stage();
-        VBox root = new VBox(20);
-        root.setAlignment(Pos.CENTER);
-        root.setPadding(new Insets(30));
-
-        Scene scene = new Scene(root, 400, 250);
-        scene.getStylesheets().add(game.getClass().getResource("/css/inputName.css").toExternalForm());
-
-        Label nameLabel = new Label("ENTREZ VOTRE NOM");
-        nameLabel.getStyleClass().add("label-title");
-
-        TextField nameInput = new TextField();
-        nameInput.setPromptText("Ex: Red, Blue...");
-        nameInput.setMaxWidth(250);
-
-        Button startButton = new Button("COMMENCER");
-        startButton.getStyleClass().add("start-button");
-        startButton.setDefaultButton(true);
-
-        startButton.setOnAction(e -> {
-            String name = nameInput.getText().trim();
-            if (!name.isEmpty()) {
-                game.player1.nom = name;
-                stage.close();
-                menuScene(game);
-            } else {
-                nameInput.setStyle("-fx-border-color: #ff7675;");
-            }
-        });
-
-        root.getChildren().addAll(nameLabel, nameInput, startButton);
-
-        stage.setTitle("PokeDuel - Inscription");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-    }
-
-    private static Node getPanelNode(Stage stage, Game game) {
+    public static Node getPanelNode(Game game) {
         VBox menuSidePanel = new VBox(15);
         menuSidePanel.getStyleClass().add("side-panel");
         menuSidePanel.setPadding(new Insets(20));
@@ -88,22 +28,22 @@ public class MenuUI {
             b.getStyleClass().add("menu-button");
         }
 
-        btnBattle.setDisable(game.player1.pokemons.isEmpty());
+        btnBattle.setDisable(game.players.get(0).pokemons.isEmpty());
         btnBattle.setOnAction(e -> {
-            BattleUI.battleScene(game);
-            stage.close();
+            ScreenManager.displayBattleChooseAction(game);
+            game.stage.close();
         });
-        btnQuit.setOnAction(e -> stage.close());
+        btnQuit.setOnAction(e -> game.stage.close());
         btnName.setOnAction(e -> {
-            playerNammingScene(game);
-            stage.close();
+            ScreenManager.displayNameChange(game);
+            game.stage.close();
         });
 
         menuSidePanel.getChildren().addAll(btnBattle, btnTeam, btnName, btnQuit);
         return menuSidePanel;
     }
 
-    private static Node getTeamPanelNode(Stage stage, Game game) {
+    public static Node getTeamPanelNode(Game game) {
         GridPane teamPanel = new GridPane();
         teamPanel.getStyleClass().add("team-panel");
         teamPanel.setPadding(new Insets(20));
@@ -112,7 +52,7 @@ public class MenuUI {
         teamPanel.setAlignment(Pos.CENTER);
 
         int i = 0;
-        for (Pokemon pokemon : game.player1.pokemons) {
+        for (Pokemon pokemon : game.players.get(0).pokemons) {
             ImageView iv = new ImageView(pokemon.frontSprite);
             iv.getStyleClass().add("team-pokemon-sprite");
 

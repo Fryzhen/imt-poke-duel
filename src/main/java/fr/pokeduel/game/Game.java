@@ -1,36 +1,41 @@
 package fr.pokeduel.game;
 
+import fr.pokeduel.bot.SimpleBot;
 import fr.pokeduel.data.DataLoader;
 import fr.pokeduel.entity.Attaque;
 import fr.pokeduel.entity.Pokemon;
+import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
-    public Player player1;
-    public Player player2;
-    public Player curentPlayer;
+    public ArrayList<Player> players = new ArrayList<Player>();
+    public int curentIndexPlayer;
+    public Stage stage;
 
     public Game() {
-        player1 = new Player("Joueur 1", true);
-        player2 = new Player("Bot", false);
-        curentPlayer = player1;
+        players.add(new Player("Joueur 1", true));
+        players.add(new SimpleBot("Bot"));
+        curentIndexPlayer = 0;
 
-        // Initialisation des pokémons des joueurs
         for (int i = 0; i < 6; i++) {
-            player1.addPokemon(getRandomPokemon());
-            player2.addPokemon(getRandomPokemon());
+            for (Player player : players) {
+                Pokemon pokemon = getRandomPokemon();
+                player.addPokemon(pokemon);
+            }
         }
     }
 
     public void switchPlayer() {
-        curentPlayer = (curentPlayer == player2) ? player1 : player2;
+        curentIndexPlayer = (curentIndexPlayer + 1) % players.size();
     }
 
     public void resetGame() {
-        curentPlayer = player1;
-        player1.reset();
-        player2.reset();
+        curentIndexPlayer = 0;
+        for (Player player : players) {
+            player.reset();
+        }
     }
 
     private Pokemon getRandomPokemon() {

@@ -1,7 +1,7 @@
 package fr.pokeduel;
 
 import fr.pokeduel.game.Game;
-import fr.pokeduel.ui.MenuUI;
+import fr.pokeduel.ui.ScreenManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -9,7 +9,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        MenuUI.menuScene(new Game());
+        ScreenManager.displayMenu(new Game());
     }
 
     static void main(String[] args) {

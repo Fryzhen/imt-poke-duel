@@ -1,4 +1,4 @@
-package fr.pokeduel.ui;
+package fr.pokeduel.ui.battle;
 
 import fr.pokeduel.entity.Pokemon;
 import fr.pokeduel.game.Game;
@@ -18,7 +18,7 @@ public class BattleScreenUI {
         battleArea.setBackground(new Background(bgImage));
 
 
-        Pokemon playerPoke = game.player1.pokemons.get(game.player1.pokemonActifIndex);
+        Pokemon playerPoke = game.players.get(0).pokemons.get(game.players.get(0).pokemonActifIndex);
         ImageView playerSprite = new ImageView(new Image(playerPoke.backSprite != null ? playerPoke.backSprite : playerPoke.frontSprite));
         playerSprite.setFitWidth(200);
         playerSprite.setPreserveRatio(true);
@@ -27,8 +27,8 @@ public class BattleScreenUI {
         playerSprite.setX(width * 0.38);
         playerSprite.setY(height * 0.4);
 
-        Pokemon enemyPoke = game.player2.pokemons.get(game.player2.pokemonActifIndex);
-        ImageView enemySprite = new ImageView(new Image(game.player2.pokemons.get(game.player2.pokemonActifIndex).frontSprite));
+        Pokemon enemyPoke = game.players.get(1).pokemons.get(game.players.get(1).pokemonActifIndex);
+        ImageView enemySprite = new ImageView(new Image(game.players.get(1).pokemons.get(game.players.get(1).pokemonActifIndex).frontSprite));
         enemySprite.setFitWidth(180);
         enemySprite.setPreserveRatio(true);
         enemySprite.setScaleX(1.2);
@@ -36,17 +36,14 @@ public class BattleScreenUI {
         enemySprite.setX(width * 0.60);
         enemySprite.setY(height * 0.22);
 
-        // Barre de l'adversaire (en haut à gauche du sprite ennemi)
         Node enemyStatus = createHealthBlock(enemyPoke, false, width, height);
         enemyStatus.setLayoutX(width * 0.85);
         enemyStatus.setLayoutY(height * 0);
 
-        // Barre du joueur (souvent placée en bas à droite du sprite pour le style "rétro")
         Node playerStatus = createHealthBlock(playerPoke, true, width, height);
         playerStatus.setLayoutX(width * 0);
         playerStatus.setLayoutY(height * 0.61);
 
-        // On ajoute tout au Pane
         battleArea.getChildren().addAll(playerSprite, enemySprite, enemyStatus, playerStatus);
 
         return battleArea;
@@ -54,39 +51,34 @@ public class BattleScreenUI {
 
     private static VBox createHealthBlock(Pokemon pokemon, boolean isPlayer, double width, double height) {
         VBox container = new VBox(2);
-        // Style du bloc blanc (bordures arrondies, fond blanc cassé, bordure grise)
-        container.setStyle(
-                "-fx-background-color: rgba(255, 255, 255, 0.9);" +
-                        "-fx-background-radius: 15 0 15 0;" + // Style un peu asymétrique comme GBA
-                        "-fx-border-color: #505050;" +
-                        "-fx-border-width: 2;" +
-                        "-fx-border-radius: 15 0 15 0;" +
-                        "-fx-padding: 8;"
-        );
+        container.getStyleClass().add("health-block");
         container.setPrefWidth(width * 0.15);
 
-        // Nom du Pokémon
         Label nameLabel = new Label(pokemon.nom.toUpperCase());
-        nameLabel.setStyle("-fx-font-family: 'Arial'; -fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #303030;");
+        nameLabel.getStyleClass().add("pokemon-name");
 
-        // Barre de vie
         ProgressBar hpBar = new ProgressBar();
         double progress = (double) pokemon.pvRestant / pokemon.stats.pv;
         hpBar.setProgress(progress);
         hpBar.setPrefWidth(width * 0.14);
         hpBar.setPrefHeight(15);
 
-        // Couleur dynamique de la barre (Vert, Orange, Rouge)
-        String color = progress > 0.5 ? "#7cfc00" : (progress > 0.2 ? "#ffaa00" : "#ff0000");
-        hpBar.setStyle("-fx-accent: " + color + "; -fx-control-inner-background: #e0e0e0;");
+        hpBar.getStyleClass().add("hp-bar");
+        if (progress > 0.5) {
+            hpBar.getStyleClass().add("hp-high");
+        } else if (progress > 0.2) {
+            hpBar.getStyleClass().add("hp-medium");
+        } else {
+            hpBar.getStyleClass().add("hp-low");
+        }
 
-        // Texte des PV (uniquement pour le joueur, comme dans les jeux)
         HBox hpTextContainer = new HBox();
+        hpTextContainer.getStyleClass().add("hp-text-container");
+
         if (isPlayer) {
             Label hpLabel = new Label(pokemon.pvRestant + " / " + pokemon.stats.pv);
-            hpLabel.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #303030;");
+            hpLabel.getStyleClass().add("hp-label");
             hpTextContainer.getChildren().add(hpLabel);
-            hpTextContainer.setStyle("-fx-alignment: CENTER-RIGHT;");
         }
 
         container.getChildren().addAll(nameLabel, hpBar, hpTextContainer);
