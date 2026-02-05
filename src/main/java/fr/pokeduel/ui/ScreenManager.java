@@ -1,7 +1,6 @@
 package fr.pokeduel.ui;
 
 import fr.pokeduel.actions.Action;
-import fr.pokeduel.entity.Pokemon;
 import fr.pokeduel.game.Game;
 import fr.pokeduel.ui.battle.BattleActionResolveUI;
 import fr.pokeduel.ui.battle.BattleMenuUI;
@@ -11,14 +10,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.util.function.Consumer;
 
 public class ScreenManager {
     //----- MENU DISPLAY -----//
@@ -116,69 +111,10 @@ public class ScreenManager {
         game.stage.getScene().setRoot(root);
     }
 
-    public static void displayForceSwitchMenu(Game game, Consumer<Integer> onPokemonSelected) {
-        VBox root = new VBox(20);
-        root.setAlignment(Pos.CENTER);
-        root.getStyleClass().add("menu-root");
-
-        Label titleLabel = new Label("Votre Pokémon est KO !\nChoisissez qui envoyer au combat :");
-        titleLabel.getStyleClass().add("menu-title");
-        titleLabel.setStyle("-fx-text-fill: white; -fx-font-size: 24px; -fx-text-alignment: center;");
-
-        GridPane teamGrid = new GridPane();
-        teamGrid.setHgap(15);
-        teamGrid.setVgap(15);
-        teamGrid.setAlignment(Pos.CENTER);
-
-        for (int i = 0; i < game.player.pokemons.size(); i++) {
-            Pokemon p = game.player.pokemons.get(i);
-            int index = i;
-
-            Button pBtn = createPokemonButton(p);
-
-            if (p.isKO()) {
-                pBtn.setDisable(true);
-                pBtn.getStyleClass().add("pokemon-btn-ko");
-            } else {
-                pBtn.setOnAction(e -> {
-                    onPokemonSelected.accept(index);
-                });
-                pBtn.getStyleClass().add("pokemon-btn-valid");
-            }
-
-            teamGrid.add(pBtn, i % 2, i / 2);
-        }
-
-        root.getChildren().addAll(titleLabel, teamGrid);
-
+    public static void displayChoseSwitchPokemon(Game game) {
+        VBox root = new VBox();
+        root.getStyleClass().add("battle-root");
+        root.getChildren().addAll(BattleScreenUI.getBattleAreaNode(game), BattleMenuUI.getForceSwitchPokemonNode(game));
         game.stage.getScene().setRoot(root);
-    }
-
-    private static Button createPokemonButton(Pokemon p) {
-        Button btn = new Button();
-        btn.setPrefSize(200, 80);
-
-        VBox content = new VBox(5);
-        content.setAlignment(Pos.CENTER_LEFT);
-
-        Label nameLabel = new Label(p.nom);
-        nameLabel.setStyle("-fx-font-weight: bold;");
-
-        ProgressBar hpBar = new ProgressBar((double) p.pvRestant / p.stats.pv);
-        hpBar.setPrefWidth(180);
-
-        String barColor = "green";
-        if (p.pvRestant == 0) barColor = "grey";
-        else if ((double) p.pvRestant / p.stats.pv < 0.2) barColor = "red";
-        else if ((double) p.pvRestant / p.stats.pv < 0.5) barColor = "orange";
-
-        hpBar.setStyle("-fx-accent: " + barColor + ";");
-
-        Label hpText = new Label(p.pvRestant + " / " + p.stats.pv + " PV");
-
-        content.getChildren().addAll(nameLabel, hpBar, hpText);
-        btn.setGraphic(content);
-
-        return btn;
     }
 }

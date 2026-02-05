@@ -72,7 +72,7 @@ public class Pokemon {
             return 0;
         }
 
-        int damage = attaque.power * (statAttaque / statDefense) / 2;
+        int damage = (attaque.power * statAttaque) / (statDefense * 2);
 
         if (types.contains(attaque.typeId)) {
             damage = (int) (1.5 * damage);

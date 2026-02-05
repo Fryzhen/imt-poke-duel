@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Game {
+    public boolean isFinished = false;
     public Player player;
     public Bot bot;
     public List<Action> actions = new ArrayList<>();
@@ -27,14 +28,17 @@ public class Game {
     public Game() {
         this.player = new Player("Joueur 1", true);
         this.bot = new SimpleBot("Bot");
-
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 6; i++) {
             this.player.addPokemon(getRandomPokemon());
-            this.bot.addPokemon(getRandomPokemon());
         }
     }
 
     public void resetGame() {
+        this.isFinished = false;
+        this.bot.pokemons = new ArrayList<>();
+        for (int i = 0; i < 1; i++) {
+            this.bot.addPokemon(getRandomPokemon());
+        }
         this.player.reset();
         this.bot.reset();
     }
@@ -44,7 +48,7 @@ public class Game {
         Random rand = new Random();
         int randomId = rand.nextInt(1024) + 1;
         Pokemon pokemon = dl.loadById(randomId);
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 4; i++) {
             pokemon.attaques.add(getRandomAttaque(pokemon));
         }
         return pokemon;

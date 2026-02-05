@@ -65,6 +65,51 @@ public class BattleMenuUI {
         return vbox;
     }
 
+    public static Node getForceSwitchPokemonNode(Game game) {
+        HBox menuArea = new HBox(100);
+        menuArea.setPrefHeight(game.height * 0.3);
+        menuArea.setAlignment(Pos.CENTER);
+        menuArea.getStyleClass().add("battle-menu-area");
+
+        Label label = new Label("Veuillez choisir un Pokémon pour continuer le combat");
+        label.getStyleClass().add("menu-title");
+
+        GridPane teamGrid = new GridPane();
+        teamGrid.setHgap(10);
+        teamGrid.setVgap(10);
+        teamGrid.setAlignment(Pos.CENTER);
+
+        var team = game.player.pokemons;
+        for (int i = 0; i < team.size(); i++) {
+            Pokemon pokemon = team.get(i);
+            Button pokeBtn = new Button();
+            ImageView pokeImg = new ImageView(pokemon.frontSprite);
+            pokeImg.setFitWidth(60);
+            pokeImg.setPreserveRatio(true);
+
+            pokeBtn.setGraphic(pokeImg);
+            pokeBtn.getStyleClass().add("team-button");
+
+            if (game.player.pokemons.get(i).id == game.player.getActivePokemon().id) {
+                pokeBtn.setDisable(true);
+                pokeBtn.getStyleClass().add("active-pokemon");
+            } else {
+                pokeBtn.setOnAction(e -> {
+                    game.player.setActivePokemon(pokemon.id);
+                    BattleResolver.resolveBattle(game);
+                });
+            }
+
+
+            teamGrid.add(pokeBtn, i % 3, i / 3);
+        }
+        VBox vbox = new VBox(15, label, teamGrid);
+        vbox.setAlignment(Pos.CENTER);
+
+        menuArea.getChildren().add(vbox);
+        return menuArea;
+    }
+
     private static Node getAttackGridNode(Game game) {
         Label label = new Label("Choisir une attaque");
         label.getStyleClass().add("menu-title");

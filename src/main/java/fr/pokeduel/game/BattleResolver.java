@@ -28,21 +28,30 @@ public class BattleResolver {
     }
 
     public static void resolveBattle(Game game) {
+        if (game.isFinished) {
+            game.stage.close();
+            game.stage = null;
+            ScreenManager.displayMenu(game);
+            return;
+        }
+
         if (game.player.getActivePokemon().isKO()) {
             if (game.player.hasAblePokemon()) {
-                // TODO Prompt player to switch Pokemon
+                ScreenManager.displayChoseSwitchPokemon(game);
                 return;
             } else {
-                // TODO Player loses
+                ScreenManager.displayMessage(game, "Vous avez perdu !");
+                game.isFinished = true;
                 return;
             }
         } else if (game.bot.getActivePokemon().isKO()) {
-            if (game.player.hasAblePokemon()) {
+            if (game.bot.hasAblePokemon()) {
+                ScreenManager.displayMessage(game, game.bot.getActivePokemon().nom + " est KO !");
                 game.bot.setActivePokemon(game.bot.getSwitchInPokemon(game));
-                // TODO Prompt player to switch Pokemon
                 return;
             } else {
-                // TODO Player loses
+                ScreenManager.displayMessage(game, "Vous avez gagné !");
+                game.isFinished = true;
                 return;
             }
         }
