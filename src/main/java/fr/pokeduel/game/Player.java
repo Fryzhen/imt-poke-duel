@@ -9,7 +9,7 @@ import java.util.List;
 public class Player {
     public String nom;
     public boolean isHuman;
-    public int pokemonActifIndex = 0;
+    private int pokemonActifIndex = 0;
     public List<Pokemon> pokemons;
 
     public Player(String nom, boolean isHuman) {

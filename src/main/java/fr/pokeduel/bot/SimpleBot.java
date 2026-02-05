@@ -3,6 +3,7 @@ package fr.pokeduel.bot;
 import fr.pokeduel.actions.Action;
 import fr.pokeduel.actions.Attaquer;
 import fr.pokeduel.actions.Echanger;
+import fr.pokeduel.entity.Pokemon;
 import fr.pokeduel.game.Game;
 
 public class SimpleBot extends Bot {
@@ -11,13 +12,13 @@ public class SimpleBot extends Bot {
     }
 
     public Action decideAction(Game game) {
-        return getSwitchInPokemonIndex(game) == -1 ? new Attaquer(this, getActivePokemon().attaques.getFirst().id) : new Echanger(this, getSwitchInPokemonIndex(game));
+        return getSwitchInPokemon(game) == -1 ? new Attaquer(game, this, getActivePokemon().attaques.getFirst().id) : new Echanger(game, this, getSwitchInPokemon(game));
     }
 
-    public int getSwitchInPokemonIndex(Game game) {
-        for (int i = 0; i < game.bot.pokemons.size(); i++) {
-            if (!game.bot.pokemons.get(i).isKO() && i != game.bot.pokemonActifIndex) {
-                return i;
+    public int getSwitchInPokemon(Game game) {
+        for (Pokemon pokemon : game.bot.pokemons) {
+            if (!pokemon.isKO() && pokemon.id != getActivePokemon().id) {
+                return pokemon.id;
             }
         }
         return -1;

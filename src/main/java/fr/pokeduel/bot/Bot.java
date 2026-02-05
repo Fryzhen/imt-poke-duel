@@ -11,5 +11,5 @@ public abstract class Bot extends Player {
 
     public abstract Action decideAction(Game game);
 
-    public abstract int getSwitchInPokemonIndex(Game game);
+    public abstract int getSwitchInPokemon(Game game);
 }

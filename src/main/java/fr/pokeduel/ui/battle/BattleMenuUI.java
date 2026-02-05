@@ -48,12 +48,12 @@ public class BattleMenuUI {
             pokeBtn.setGraphic(pokeImg);
             pokeBtn.getStyleClass().add("team-button");
 
-            if (i == game.player.pokemonActifIndex) {
+            if (game.player.pokemons.get(i).id == game.player.getActivePokemon().id) {
                 pokeBtn.setDisable(true);
                 pokeBtn.getStyleClass().add("active-pokemon");
             } else {
                 pokeBtn.setOnAction(e -> {
-                    BattleResolver.resolveActions(game, new Echanger(game.player, team.indexOf(pokemon)));
+                    BattleResolver.resolveActions(game, new Echanger(game, game.player, pokemon.id));
                 });
             }
 
@@ -74,7 +74,7 @@ public class BattleMenuUI {
         attackGrid.setVgap(15);
         attackGrid.setAlignment(Pos.CENTER);
 
-        Pokemon pActif = game.player.pokemons.get(game.player.pokemonActifIndex);
+        Pokemon pActif = game.player.getActivePokemon();
 
         for (int i = 0; i < 4; i++) {
             boolean hasMove = i < pActif.attaques.size();
@@ -96,7 +96,7 @@ public class BattleMenuUI {
                         "-fx-background-radius: 5;");
 
                 atkBtn.setOnAction(e -> {
-                    BattleResolver.resolveActions(game, new Attaquer(game.player, attaque.id));
+                    BattleResolver.resolveActions(game, new Attaquer(game, game.player, attaque.id));
                 });
             }
             attackGrid.add(atkBtn, i % 2, i / 2);

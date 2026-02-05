@@ -18,13 +18,13 @@ public class BattleScreenUI {
         battleArea.setBackground(new Background(bgImage));
 
 
-        Pokemon playerPoke = game.player.pokemons.get(game.player.pokemonActifIndex);
+        Pokemon playerPoke = game.player.getActivePokemon();
         ImageView playerSprite = createPokemonSprite(playerPoke, true);
         playerSprite.setX(game.width * 0.38);
         playerSprite.setY(game.height * 0.4);
 
         Pokemon enemyPoke = game.bot.getActivePokemon();
-        ImageView enemySprite = createPokemonSprite(playerPoke, false);
+        ImageView enemySprite = createPokemonSprite(enemyPoke, false);
         enemySprite.setX(game.width * 0.60);
         enemySprite.setY(game.height * 0.22);
 

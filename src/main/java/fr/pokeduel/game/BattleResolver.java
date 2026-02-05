@@ -1,6 +1,7 @@
 package fr.pokeduel.game;
 
 import fr.pokeduel.actions.Action;
+import fr.pokeduel.ui.ScreenManager;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,9 @@ public class BattleResolver {
             }
             return Math.random() < 0.5 ? -1 : 1;
         });
+
+        game.actions = new ArrayList<>(actionList);
+        resolveBattle(game);
     }
 
     public static void resolveBattle(Game game) {
@@ -34,7 +38,7 @@ public class BattleResolver {
             }
         } else if (game.bot.getActivePokemon().isKO()) {
             if (game.player.hasAblePokemon()) {
-                game.bot.pokemonActifIndex = game.bot.getSwitchInPokemonIndex(game);
+                game.bot.setActivePokemon(game.bot.getSwitchInPokemon(game));
                 // TODO Prompt player to switch Pokemon
                 return;
             } else {
@@ -43,11 +47,13 @@ public class BattleResolver {
             }
         }
 
+        if (game.actions.isEmpty()) {
+            ScreenManager.displayBattleChooseAction(game);
+        }
+
         Action action = game.actions.removeFirst();
 
-        // TODO Execute action
-
-        
-
+        action.execute();
+        ScreenManager.displayMessage(game, action.getMessage());
     }
 }
