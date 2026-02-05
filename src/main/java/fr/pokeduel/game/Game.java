@@ -1,18 +1,28 @@
 package fr.pokeduel.game;
 
+import fr.pokeduel.actions.Action;
 import fr.pokeduel.bot.Bot;
 import fr.pokeduel.bot.SimpleBot;
 import fr.pokeduel.data.DataLoader;
 import fr.pokeduel.entity.Attaque;
 import fr.pokeduel.entity.Pokemon;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Game {
     public Player player;
     public Bot bot;
+    public List<Action> actions = new ArrayList<>();
+
     public Stage stage;
+    private static final Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+    public double width = screenBounds.getWidth();
+    public double height = screenBounds.getHeight();
 
     public Game() {
         this.player = new Player("Joueur 1", true);
@@ -24,7 +34,6 @@ public class Game {
         }
     }
 
-
     public void resetGame() {
         this.player.reset();
         this.bot.reset();
@@ -33,9 +42,9 @@ public class Game {
     private Pokemon getRandomPokemon() {
         DataLoader<Pokemon> dl = new DataLoader<Pokemon>(Pokemon.class);
         Random rand = new Random();
-        int randomId = rand.nextInt(1024) + 1; // IDs from 1 to 151
+        int randomId = rand.nextInt(1024) + 1;
         Pokemon pokemon = dl.loadById(randomId);
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 1; i++) {
             pokemon.attaques.add(getRandomAttaque(pokemon));
         }
         return pokemon;

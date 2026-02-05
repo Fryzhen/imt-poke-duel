@@ -1,6 +1,7 @@
 package fr.pokeduel.bot;
 
 import fr.pokeduel.actions.Action;
+import fr.pokeduel.actions.Attaquer;
 import fr.pokeduel.actions.Echanger;
 import fr.pokeduel.game.Game;
 
@@ -10,7 +11,7 @@ public class SimpleBot extends Bot {
     }
 
     public Action decideAction(Game game) {
-        return new Echanger(this, getSwitchInPokemonIndex(game));
+        return getSwitchInPokemonIndex(game) == -1 ? new Attaquer(this, getActivePokemon().attaques.getFirst().id) : new Echanger(this, getSwitchInPokemonIndex(game));
     }
 
     public int getSwitchInPokemonIndex(Game game) {

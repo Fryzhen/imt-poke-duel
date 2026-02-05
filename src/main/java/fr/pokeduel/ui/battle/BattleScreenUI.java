@@ -10,39 +10,31 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 public class BattleScreenUI {
-    public static Node getBattleAreaNode(Game game, double width, double height) {
+    public static Node getBattleAreaNode(Game game) {
         Pane battleArea = new Pane();
-        battleArea.setPrefHeight(height * 0.7);
+        battleArea.setPrefHeight(game.height * 0.7);
 
         BackgroundImage bgImage = new BackgroundImage(new Image(BattleScreenUI.class.getClassLoader().getResource("img/battle_scene.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, true));
         battleArea.setBackground(new Background(bgImage));
 
 
         Pokemon playerPoke = game.player.pokemons.get(game.player.pokemonActifIndex);
-        ImageView playerSprite = new ImageView(new Image(playerPoke.backSprite != null ? playerPoke.backSprite : playerPoke.frontSprite));
-        playerSprite.setFitWidth(200);
-        playerSprite.setPreserveRatio(true);
-        playerSprite.setScaleX(1.2);
-        playerSprite.setScaleY(1.2);
-        playerSprite.setX(width * 0.38);
-        playerSprite.setY(height * 0.4);
+        ImageView playerSprite = createPokemonSprite(playerPoke, true);
+        playerSprite.setX(game.width * 0.38);
+        playerSprite.setY(game.height * 0.4);
 
         Pokemon enemyPoke = game.bot.getActivePokemon();
-        ImageView enemySprite = new ImageView(new Image(game.bot.getActivePokemon().frontSprite));
-        enemySprite.setFitWidth(180);
-        enemySprite.setPreserveRatio(true);
-        enemySprite.setScaleX(1.2);
-        enemySprite.setScaleY(1.2);
-        enemySprite.setX(width * 0.60);
-        enemySprite.setY(height * 0.22);
+        ImageView enemySprite = createPokemonSprite(playerPoke, false);
+        enemySprite.setX(game.width * 0.60);
+        enemySprite.setY(game.height * 0.22);
 
-        Node enemyStatus = createHealthBlock(enemyPoke, false, width, height);
-        enemyStatus.setLayoutX(width * 0.85);
-        enemyStatus.setLayoutY(height * 0);
+        Node enemyStatus = createHealthBlock(enemyPoke, false, game.width, game.height);
+        enemyStatus.setLayoutX(game.width * 0.85);
+        enemyStatus.setLayoutY(game.height * 0);
 
-        Node playerStatus = createHealthBlock(playerPoke, true, width, height);
-        playerStatus.setLayoutX(width * 0);
-        playerStatus.setLayoutY(height * 0.61);
+        Node playerStatus = createHealthBlock(playerPoke, true, game.width, game.height);
+        playerStatus.setLayoutX(game.width * 0);
+        playerStatus.setLayoutY(game.height * 0.61);
 
         battleArea.getChildren().addAll(playerSprite, enemySprite, enemyStatus, playerStatus);
 
@@ -83,5 +75,14 @@ public class BattleScreenUI {
 
         container.getChildren().addAll(nameLabel, hpBar, hpTextContainer);
         return container;
+    }
+
+    private static ImageView createPokemonSprite(Pokemon pokemon, boolean isPlayer) {
+        ImageView spriteView = new ImageView(new Image(isPlayer && pokemon.backSprite != null ? pokemon.backSprite : pokemon.frontSprite));
+        spriteView.setFitWidth(150);
+        spriteView.setPreserveRatio(true);
+        spriteView.setScaleX(1.2);
+        spriteView.setScaleY(1.2);
+        return spriteView;
     }
 }

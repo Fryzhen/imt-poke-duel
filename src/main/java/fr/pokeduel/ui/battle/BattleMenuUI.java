@@ -17,9 +17,9 @@ import javafx.scene.layout.VBox;
 
 public class BattleMenuUI {
 
-    public static Node getMenuAreaNode(Game game, double width, double height) {
+    public static Node getMenuAreaNode(Game game) {
         HBox menuArea = new HBox(100);
-        menuArea.setPrefHeight(height * 0.3);
+        menuArea.setPrefHeight(game.height * 0.3);
         menuArea.setAlignment(Pos.CENTER);
         menuArea.getStyleClass().add("battle-menu-area");
 
@@ -53,7 +53,7 @@ public class BattleMenuUI {
                 pokeBtn.getStyleClass().add("active-pokemon");
             } else {
                 pokeBtn.setOnAction(e -> {
-                    BattleResolver.resolveBattle(game, new Echanger(game.player, team.indexOf(pokemon)));
+                    BattleResolver.resolveActions(game, new Echanger(game.player, team.indexOf(pokemon)));
                 });
             }
 
@@ -78,25 +78,56 @@ public class BattleMenuUI {
 
         for (int i = 0; i < 4; i++) {
             boolean hasMove = i < pActif.attaques.size();
-            Button atkBtn = null;
+            Button atkBtn;
+
             if (!hasMove) {
                 atkBtn = new Button("-");
                 atkBtn.getStyleClass().add("attack-button");
                 atkBtn.setDisable(true);
             } else {
                 Attaque attaque = pActif.attaques.get(i);
-                if (attaque != null) {
-                    atkBtn = new Button(attaque.name.substring(0, 1).toUpperCase() + attaque.name.substring(1).toLowerCase());
-                    atkBtn.getStyleClass().add("attack-button");
-                    atkBtn.setOnAction(e -> {
-                        BattleResolver.resolveBattle(game, new Attaquer(game.player, attaque.id));
-                    });
-                }
+                atkBtn = new Button(attaque.name.substring(0, 1).toUpperCase() + attaque.name.substring(1).toLowerCase());
+                atkBtn.getStyleClass().add("attack-button");
+
+                String hexColor = getTypeColorById(attaque.typeId);
+                atkBtn.setStyle("-fx-background-color: " + hexColor + "; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-background-radius: 5;");
+
+                atkBtn.setOnAction(e -> {
+                    BattleResolver.resolveActions(game, new Attaquer(game.player, attaque.id));
+                });
             }
             attackGrid.add(atkBtn, i % 2, i / 2);
         }
+
         VBox vbox = new VBox(15, label, attackGrid);
         vbox.setAlignment(Pos.CENTER);
         return vbox;
+    }
+
+    private static String getTypeColorById(int typeId) {
+        return switch (typeId) {
+            case 1 -> "#A8A878";  // Normal
+            case 2 -> "#C03028";  // Fighting
+            case 3 -> "#A890F0";  // Flying
+            case 4 -> "#A040A0";  // Poison
+            case 5 -> "#E0C068";  // Ground
+            case 6 -> "#B8A038";  // Rock
+            case 7 -> "#A8B820";  // Bug
+            case 8 -> "#705898";  // Ghost
+            case 9 -> "#B8B8D0";  // Steel
+            case 10 -> "#F08030"; // Fire
+            case 11 -> "#6890F0"; // Water
+            case 12 -> "#78C850"; // Grass
+            case 13 -> "#F8D030"; // Electric
+            case 14 -> "#F85888"; // Psychic
+            case 15 -> "#98D8D8"; // Ice
+            case 16 -> "#7038F8"; // Dragon
+            case 17 -> "#705848"; // Dark
+            case 18 -> "#EE99AC"; // Fairy
+            default -> "#717171";
+        };
     }
 }
